@@ -1,4 +1,8 @@
-from fastapi import FastAPI
+'''
+In a REST API, query parameters are commonly used on read endpoints 
+to apply pagination, a filter, a sorting order, or selecting fields.
+'''
+from fastapi import FastAPI, Query
 
 app = FastAPI()
 
