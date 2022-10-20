@@ -8,4 +8,7 @@ app = FastAPI()
 
 @app.get("/users")
 async def get_user(page:int=1, size:int=10):
+    """
+    http://localhost:8000/users?page=5&size=50
+    """
     return {"page":page, "size":size}
