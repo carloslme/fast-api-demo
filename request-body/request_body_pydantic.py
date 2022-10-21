@@ -4,7 +4,7 @@ First, it's quite verbose and makes the path operation function prototype huge,
 especially for bigger models. Second, usually, you'll need to reuse the 
 data structure on other endpoints or in other parts of your application.
 """
-from fastapi import FastAPI
+from fastapi import FastAPI, Body
 from pydantic import BaseModel
 
 class User(BaseModel):
@@ -24,7 +24,7 @@ async def create_user(user: User):
     return user
 
 @app.post("/multiple-objects")
-async def create_user(user: User, company:Company):
+async def multiple_objects(user: User, company:Company):
     """
     curl -X 'POST' \
     'http://127.0.0.1:8000/multiple-objects' \
@@ -42,3 +42,8 @@ async def create_user(user: User, company:Company):
     """
     return {"user":user, "company":company}
 
+
+@app.post("/users-priority")
+async def users_priority(user: User, priority: int = Body(...,
+ge=1, le=3)):
+    return {"user": user, "priority": priority}
